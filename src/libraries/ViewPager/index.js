@@ -119,6 +119,11 @@ export default class ViewPager extends PureComponent {
     }
 
     componentDidUpdate (prevProps) {
+        if (prevProps.initialPage !== this.props.initialPage) {
+            const page = this.validPage(this.props.initialPage);
+            this.onPageChanged(page);
+        }
+
         if (this.layoutChanged) {
             this.layoutChanged = false;
             if (typeof this.currentPage === 'number') {
